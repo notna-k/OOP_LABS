@@ -7,7 +7,6 @@ public class StringCalculator {
         if (numbers.isEmpty()) return 0;
 
         String[] numArr = numbers.split(delimeter);
-        if (numArr.length > 2) throw new Error("String length must not be greater than 2");
         for (String s : numArr) {
             sum += Integer.parseInt(s);
         }

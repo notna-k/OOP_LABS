@@ -14,5 +14,6 @@ public class StrCalcTest {
         assertEquals(0, stringCalculator.add(""));
         assertEquals(1, stringCalculator.add("1"));
         assertEquals(3, stringCalculator.add("1,2"));
+        assertEquals(161, stringCalculator.add("1,2,3,55,100"));
     }
 }
