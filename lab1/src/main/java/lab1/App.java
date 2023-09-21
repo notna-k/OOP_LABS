@@ -17,7 +17,7 @@ public class App {
             int sum = stringCalculator.add(str);
 
             System.out.println();
-            System.out.println("The sum of the numbers is: " + sum);
+            if (sum != Integer.MIN_VALUE) System.out.println("The sum of the numbers is: " + sum);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
