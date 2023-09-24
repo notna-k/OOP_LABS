@@ -22,5 +22,7 @@ public class StrCalcTest {
         assertEquals(20, stringCalculator.add("///\n5/5/10"));
 
         assertEquals(Integer.MIN_VALUE, stringCalculator.add("//;\n-123;23;4;1"));
+
+        assertEquals(200, stringCalculator.add("//;\n55;105;10000;40"));
     }
 }

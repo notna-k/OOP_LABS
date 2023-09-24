@@ -44,9 +44,9 @@ public class StringCalculator {
                 //adding given numbers
                 if (temp.isEmpty()) throw new Exception("Delimiters cannot go one after another");
                 int currentNumber = Integer.parseInt(temp);
-                if(Integer.parseInt(temp) < 0){
+                if(currentNumber < 0){
                     negativeNumArr.add(currentNumber);
-                }else {
+                }else if (currentNumber < 1001){
                     numArr.add(currentNumber);
                 }
                 temp = "";
