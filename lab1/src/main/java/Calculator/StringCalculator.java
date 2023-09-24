@@ -39,17 +39,16 @@ public class StringCalculator {
                     temp += numbers.charAt(j);
                     j++;
                 }
-                if (!temp.isEmpty()) {
-                    numArr.add(Integer.parseInt(temp));
-                    temp = "";
-                }
+                if (temp.isEmpty()) throw new Exception("Delimiters cannot go one after another");
+                numArr.add(Integer.parseInt(temp));
+                temp = "";
+
 
                 //adding given numbers
                 j++;
 
             }
         } catch (Exception e){
-            System.out.println("Error: Invalid string provided");
             System.out.println(e);
             return Integer.MIN_VALUE;
         }
