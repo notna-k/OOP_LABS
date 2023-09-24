@@ -12,6 +12,7 @@ public class StringCalculator {
 
         String delimiter = ",\n";
         ArrayList<Integer> numArr = new ArrayList<>();
+        ArrayList<Integer> negativeNumArr = new ArrayList<>();
         int j;
 
         try{
@@ -39,18 +40,27 @@ public class StringCalculator {
                     temp += numbers.charAt(j);
                     j++;
                 }
+
+                //adding given numbers
                 if (!temp.isEmpty()) {
-                    numArr.add(Integer.parseInt(temp));
+                    int currentNumber = Integer.parseInt(temp);
+                    if(Integer.parseInt(temp) < 0){
+                        negativeNumArr.add(currentNumber);
+                    }else {
+                        numArr.add(currentNumber);
+                    }
                     temp = "";
                 }
 
-                //adding given numbers
+
                 j++;
 
             }
+
+            if (!negativeNumArr.isEmpty()) throw new Exception("Negative numbers forbidden");
         } catch (Exception e){
-            System.out.println("Error: Invalid string provided");
             System.out.println(e);
+            if (!negativeNumArr.isEmpty()) System.out.println(negativeNumArr);
             return Integer.MIN_VALUE;
         }
         return numArr.stream().mapToInt(Integer::intValue).sum(); //sum of all elements in array
