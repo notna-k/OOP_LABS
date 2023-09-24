@@ -42,15 +42,15 @@ public class StringCalculator {
                 }
 
                 //adding given numbers
-                if (!temp.isEmpty()) {
-                    int currentNumber = Integer.parseInt(temp);
-                    if(Integer.parseInt(temp) < 0){
-                        negativeNumArr.add(currentNumber);
-                    }else {
-                        numArr.add(currentNumber);
-                    }
-                    temp = "";
+                if (temp.isEmpty()) throw new Exception("Delimiters cannot go one after another");
+                int currentNumber = Integer.parseInt(temp);
+                if(Integer.parseInt(temp) < 0){
+                    negativeNumArr.add(currentNumber);
+                }else {
+                    numArr.add(currentNumber);
                 }
+                temp = "";
+
 
 
                 j++;
