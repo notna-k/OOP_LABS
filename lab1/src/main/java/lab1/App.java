@@ -25,7 +25,7 @@ public class App {
                 str1 += '\n';
                 String str2 = scanner.nextLine();
                 str = str1.concat(str2);
-            } else {
+            } else if(ifyes.toLowerCase().equals("n")) {
                 System.out.println("(,)/(\\n):");
                 String delimiter = scanner.nextLine();
                 if(delimiter.equals(",")){
@@ -43,7 +43,7 @@ public class App {
 
                 } else throw new Exception("Invalid delimiter provided");
 
-            }
+            } else throw new Exception("Invalid delimiter provided");
             int sum = stringCalculator.add(str);
 
             if (sum != Integer.MIN_VALUE) System.out.println("The sum of the numbers is: " + sum);

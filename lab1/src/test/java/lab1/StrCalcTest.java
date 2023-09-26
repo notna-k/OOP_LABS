@@ -18,11 +18,14 @@ public class StrCalcTest {
         assertEquals(81, stringCalculator.add("21,4\n33,23"));
         assertEquals(40, stringCalculator.add("23\n17"));
 
-        assertEquals(10, stringCalculator.add("//;\n1;2;3;4"));
-        assertEquals(20, stringCalculator.add("///\n5/5/10"));
+        assertEquals(10, stringCalculator.add("//[;]\n1;2;3;4"));
+        assertEquals(20, stringCalculator.add("//[/]\n5/5/10"));
 
-        assertEquals(Integer.MIN_VALUE, stringCalculator.add("//;\n-123;23;4;1"));
+        assertEquals(Integer.MIN_VALUE, stringCalculator.add("//[;]\n-123;23;4;1"));
 
-        assertEquals(200, stringCalculator.add("//;\n55;105;10000;40"));
+        assertEquals(200, stringCalculator.add("//[;]\n55;105;10000;40"));
+
+        assertEquals(350, stringCalculator.add("//[space]\n5space45space300"));
+
     }
 }

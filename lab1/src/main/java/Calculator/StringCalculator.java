@@ -13,19 +13,20 @@ public class StringCalculator {
         String delimiter = ",\n";
         ArrayList<Integer> numArr = new ArrayList<>();
         ArrayList<Integer> negativeNumArr = new ArrayList<>();
+
         int j;
 
         try{
             //cutting the delimiter from string
-            if(numbers.startsWith("//")) {
-                j = 2;
+            if(numbers.startsWith("//[")) {
+                j = 3;
                 delimiter = "";
-                while (numbers.charAt(j) != '\n') {
+                while (numbers.charAt(j) != ']') {
                     delimiter += numbers.charAt(j);
                     if (j >= numbers.length()) throw new Exception("Invalid delimiter Schema provided");
                     j++;
                 }
-                j++;
+                j = j + 2;
                 numbers = numbers.substring(j);
 
             }
@@ -36,8 +37,12 @@ public class StringCalculator {
 
             //Reading one number (part of the string before delimiter
             while (j < numbers.length()) {
+
                 while (j < numbers.length() && !delimiter.contains(String.valueOf(numbers.charAt(j)))) {
                     temp += numbers.charAt(j);
+                    j++;
+                }
+                while (j < numbers.length() && delimiter.contains(String.valueOf(numbers.charAt(j)))){
                     j++;
                 }
 
@@ -53,7 +58,6 @@ public class StringCalculator {
 
 
 
-                j++;
 
             }
 
