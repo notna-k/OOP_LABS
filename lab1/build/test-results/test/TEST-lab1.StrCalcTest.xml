@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lab1.StrCalcTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-09-26T18:06:43" hostname="fedora" time="0.021">
+<testsuite name="lab1.StrCalcTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-09-28T18:08:48" hostname="fedora" time="0.024">
   <properties/>
-  <testcase name="addition()" classname="lab1.StrCalcTest" time="0.021"/>
-  <system-out><![CDATA[java.lang.Exception: Negative numbers forbidden
-[-123]
+  <testcase name="addition()" classname="lab1.StrCalcTest" time="0.024"/>
+  <system-out><![CDATA[[-123]
+Negative numbers forbidden
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

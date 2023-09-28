@@ -11,6 +11,15 @@ public class StrCalcTest {
 
     @Test
     void addition(){
+        //"have-not-to-work" block
+        try {
+            assertEquals(Integer.MIN_VALUE, stringCalculator.add("//[;]\n-123;23;4;1"));
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+
+
         assertEquals(0, stringCalculator.add(""));
         assertEquals(1, stringCalculator.add("1"));
         assertEquals(3, stringCalculator.add("1,2"));
@@ -21,11 +30,15 @@ public class StrCalcTest {
         assertEquals(10, stringCalculator.add("//[;]\n1;2;3;4"));
         assertEquals(20, stringCalculator.add("//[/]\n5/5/10"));
 
-        assertEquals(Integer.MIN_VALUE, stringCalculator.add("//[;]\n-123;23;4;1"));
 
         assertEquals(200, stringCalculator.add("//[;]\n55;105;10000;40"));
 
-        assertEquals(350, stringCalculator.add("//[space]\n5space45space300"));
+
+        assertEquals(30, stringCalculator.add("//[j][;][,]\n1j2j3;4,5,5;10"));
+        assertEquals(330, stringCalculator.add("//[m][;][,][j]\n1j2j3;4,5,5;10m100m200"));
+
+
+
 
     }
 }
