@@ -1,2 +1,3 @@
 [-123]
-Negative numbers forbidden
+?java.lang.IllegalArgumentException: Negative numbers forbidden
+Ajava.lang.IllegalArgumentException: Delimiters cannot be numbers

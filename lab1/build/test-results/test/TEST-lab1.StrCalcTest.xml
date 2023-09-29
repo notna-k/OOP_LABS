@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lab1.StrCalcTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-09-28T18:08:48" hostname="fedora" time="0.024">
+<testsuite name="lab1.StrCalcTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-09-29T09:31:12" hostname="fedora" time="0.026">
   <properties/>
-  <testcase name="addition()" classname="lab1.StrCalcTest" time="0.024"/>
+  <testcase name="addition()" classname="lab1.StrCalcTest" time="0.026"/>
   <system-out><![CDATA[[-123]
-Negative numbers forbidden
+java.lang.IllegalArgumentException: Negative numbers forbidden
+java.lang.IllegalArgumentException: Delimiters cannot be numbers
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
