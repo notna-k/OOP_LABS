@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.lab2.Matrix.Matrix;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -97,6 +98,28 @@ public class MatrixTest {
 
         Assertions.assertEquals(expectedBodyStr, actualBodyStr);
 
+    }
+
+    @Test
+    void getRowTest(){
+        Matrix matrix = new Matrix(2,3);
+
+        double[] expectedRow = {0.0, 0.0, 0.0};
+
+        String expectedBodyStr = Arrays.toString(expectedRow);
+        String actualBodyStr = Arrays.toString(matrix.getRow(1));
+        Assertions.assertEquals(expectedBodyStr, actualBodyStr);
+    }
+
+    @Test
+    void getColumnTest(){
+        Matrix matrix = new Matrix(2,3);
+
+        double[] expectedColumn = {0.0, 0.0};
+
+        String expectedBodyStr = Arrays.toString(expectedColumn);
+        String actualBodyStr = Arrays.toString(matrix.getColumn(1));
+        Assertions.assertEquals(expectedBodyStr, actualBodyStr);
     }
 
 

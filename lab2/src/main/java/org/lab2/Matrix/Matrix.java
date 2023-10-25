@@ -113,6 +113,40 @@ public class Matrix {
         int precisionAfterComma = 3;
         printMatrix(3);
     }
+
+
+
+
+    public double getElement(int row, int column){
+        return this.body.get(row).get(column);
+    }
+
+    public double[] getRow(int row){
+        row -= 1;
+        ArrayList<Double> matrixRow = this.body.get(row);
+        double[] array = new double[matrixRow.size()];
+        for(int i = 0; i < matrixRow.size(); i++){
+            array[i] = matrixRow.get(i);
+        }
+        return array;
+    }
+
+    public double[] getColumn(int column){
+        column -= 1;
+        ArrayList<Double> matrixColumn = new ArrayList<>();
+
+        for(ArrayList<Double> row : this.body){
+            matrixColumn.add(row.get(column));
+        }
+
+        double[] array = new double[matrixColumn.size()];
+        for(int i = 0; i < matrixColumn.size(); i++){
+            array[i] = matrixColumn.get(i);
+        }
+        return array;
+    }
+
+
     private int getMaxLen(int precisionAfterComma){
         int maxLen = 0;
 
