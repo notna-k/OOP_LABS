@@ -56,6 +56,52 @@ public class MatrixTest {
         Assertions.assertEquals(givenRows, actualRows);
     }
 
+    @Test
+    void setMatrixTest(){
+        double[][] matrixBody = {
+                {0.1, 0.23, 223.2, 23.0},
+                {12.2, 23.1, 34.2, 0.001}
+        };
+
+        Matrix matrix = new Matrix();
+        matrix.setMatrix(matrixBody);
+
+        int givenRows = matrixBody.length;
+        int givenColumns = matrixBody[0].length;
+
+        String actualBodyStr = Arrays.deepToString(matrixBody);
+        String expectedBodyStr = Arrays.deepToString(matrix.getBody());
+
+        int actualColumns = matrix.getColumns();
+        int actualRows = matrix.getRows();
+
+
+        Assertions.assertEquals(expectedBodyStr, actualBodyStr);
+        Assertions.assertEquals(givenColumns, actualColumns);
+        Assertions.assertEquals(givenRows, actualRows);
+    }
+
+    @Test
+    void setMatrixValuesTest(){
+        Matrix matrix = new Matrix(3,4);
+        matrix.setValue(1,4, 2232.3235);
+
+        double[][] expectedBody = {
+                {0.0, 0.0, 0.0, 2232.3235},
+                {0.0, 0.0, 0.0, 0.0},
+                {0.0, 0.0, 0.0, 0.0}
+        };
+
+        String actualBodyStr = Arrays.deepToString(matrix.getBody());
+        String expectedBodyStr = Arrays.deepToString(expectedBody);
+
+        Assertions.assertEquals(expectedBodyStr, actualBodyStr);
+
+    }
+
+
+
+
 
 
 }
