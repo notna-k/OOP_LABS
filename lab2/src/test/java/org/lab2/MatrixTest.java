@@ -122,6 +122,14 @@ public class MatrixTest {
         Assertions.assertEquals(expectedBodyStr, actualBodyStr);
     }
 
+    @Test
+    void getDimensityTest(){
+        Matrix matrix = new Matrix(2,3);
+        int dim[] = matrix.getDimensity();
+        Assertions.assertEquals(2, dim[0]);
+        Assertions.assertEquals(3, dim[1]);
+    }
+
 
 
 

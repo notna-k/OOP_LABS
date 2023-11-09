@@ -70,6 +70,15 @@ public class Matrix {
         this.body = arrayList;
     }
 
+    public int[] getDimensity(){
+        int[] dim = new int[2];
+        dim[0] = this.rows;
+        dim[1] = this.columns;
+        return dim;
+    }
+
+
+
     public void printMatrix(int precisionAfterComma) {
         String patternString = "";
         for(int i = 0; i < precisionAfterComma; i++) patternString = patternString.concat("#");
