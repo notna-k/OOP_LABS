@@ -5,11 +5,15 @@ import org.lab2.Main;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Matrix {
     private int rows;
     private int columns;
     private ArrayList<ArrayList<Double>> body;
+
+
+    private final int prime = 31;
 
 
     public Matrix(){
@@ -25,15 +29,31 @@ public class Matrix {
         setZeros();
     }
 
+    public Matrix(Double[][] matrix){
+        this.columns = matrix[0].length;
+        this.rows = matrix.length;
+        ArrayList<ArrayList<Double>> arrayList = new ArrayList<>();
+        for (Double[] row : matrix) {
+            ArrayList<Double> arrayListRow = new ArrayList<>();
+
+            Collections.addAll(arrayListRow, row);
+
+            arrayList.add(arrayListRow);
+        }
+        this.body = arrayList;
+    }
+
     public Matrix(double[][] matrix){
         this.columns = matrix[0].length;
         this.rows = matrix.length;
         ArrayList<ArrayList<Double>> arrayList = new ArrayList<>();
         for (double[] row : matrix) {
             ArrayList<Double> arrayListRow = new ArrayList<>();
-            for (double value : row) {
-                arrayListRow.add(value);
+
+            for(double el: row){
+                arrayListRow.add(el);
             }
+
             arrayList.add(arrayListRow);
         }
         this.body = arrayList;
@@ -46,16 +66,44 @@ public class Matrix {
         return this.rows;
     }
 
-    public Object[] getBody() {
-        return this.body.toArray();
+    public ArrayList<ArrayList<Double>> getBody() {
+        return this.body;
     }
 
-    public void setValue(int row, int column, double value){
+    public static Double[][] toDouble(ArrayList<ArrayList<Double>> matrix) {
+        int rows = matrix.size();
+        int columns = matrix.get(0).size();
+
+        Double[][] result = new Double[rows][columns];
+
+        for (int i = 0; i < rows; i++) {
+            ArrayList<Double> rowList = matrix.get(i);
+            result[i] = rowList.toArray(new Double[0]);
+        }
+
+        return result;
+    }
+
+    public void setValue(int row, int column, Double value){
         if (row < 0 || row > this.rows || column < 0 || column > this.columns) {
             throw new IndexOutOfBoundsException("Invalid row or column index!");
         }
         this.body.get(row-1).set(column-1, value);
     }
+    public void setMatrix(Double[][] matrix){
+        this.columns = matrix[0].length;
+        this.rows = matrix.length;
+        ArrayList<ArrayList<Double>> arrayList = new ArrayList<>();
+        for (Double[] row : matrix) {
+            ArrayList<Double> arrayListRow = new ArrayList<>();
+            for (double value : row) {
+                arrayListRow.add(value);
+            }
+            arrayList.add(arrayListRow);
+        }
+        this.body = arrayList;
+    }
+
     public void setMatrix(double[][] matrix){
         this.columns = matrix[0].length;
         this.rows = matrix.length;
@@ -69,6 +117,8 @@ public class Matrix {
         }
         this.body = arrayList;
     }
+
+
 
     public int[] getDimensity(){
         int[] dim = new int[2];
@@ -154,6 +204,109 @@ public class Matrix {
         }
         return array;
     }
+
+
+
+    @Override
+    public boolean equals(Object obj) {
+        try{
+            Matrix matrix = (Matrix) obj;
+
+
+
+            for (int i = 0; i < this.rows; i++) {
+                for (int j = 0; j < this.columns; j++) {
+                    if (!this.body.get(i).get(j).equals(matrix.getBody().get(i).get(j))) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        } catch(ClassCastException | NullPointerException | ArrayIndexOutOfBoundsException e){
+            System.out.println(e);return false; }
+
+
+    }
+
+    public boolean equals(double[][] matrix) {
+        try{
+
+            for (int i = 0; i < this.rows; i++) {
+                for (int j = 0; j < this.columns; j++) {
+                    if (!this.body.get(i).get(j).equals(matrix[i][j])) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        } catch(ClassCastException | NullPointerException | ArrayIndexOutOfBoundsException e){
+            System.out.println(e);return false; }
+
+
+    }
+
+    public boolean equals(Double[][] matrix) {
+        try{
+
+            for (int i = 0; i < this.rows; i++) {
+                for (int j = 0; j < this.columns; j++) {
+                    if (!this.body.get(i).get(j).equals(matrix[i][j])) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        } catch(ClassCastException | NullPointerException | ArrayIndexOutOfBoundsException e){
+            System.out.println(e);return false; }
+
+
+    }
+
+
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+
+        result = prime * result + columns;
+        result = prime * result + rows;
+        result = prime * result + ((body == null) ? 0 : calculateBodyHashCode());
+
+        return result;
+    }
+
+    private int calculateBodyHashCode() {
+        int bodyHashCode = 1;
+
+        for (ArrayList<Double> row : body) {
+            bodyHashCode = prime * bodyHashCode + ((row == null) ? 0 : row.hashCode());
+        }
+
+        return bodyHashCode;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     private int getMaxLen(int precisionAfterComma){

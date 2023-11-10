@@ -15,9 +15,8 @@ public class MatrixTest {
     @Test
     void emptyMatrixTest(){
         Matrix matrix = new Matrix();
-        String expectedBodyStr = Arrays.deepToString(new double[0][0]);
-        String actualBodyStr = Arrays.deepToString(matrix.getBody());
-        Assertions.assertEquals(expectedBodyStr, actualBodyStr);
+
+        Assertions.assertTrue(matrix.equals(new Double[0][0]));
     }
 
     @Test
@@ -28,9 +27,8 @@ public class MatrixTest {
                 {0.0, 0.0, 0.0},
                 {0.0, 0.0, 0.0}
         };
-        String expectedBodyStr = Arrays.deepToString(expectedBody);
-        String actualBodyStr = Arrays.deepToString(matrix.getBody());
-        Assertions.assertEquals(expectedBodyStr, actualBodyStr);
+
+        Assertions.assertTrue(matrix.equals(matrix));
     }
 
     @Test
@@ -45,14 +43,12 @@ public class MatrixTest {
         int givenRows = matrixBody.length;
         int givenColumns = matrixBody[0].length;
 
-        String actualBodyStr = Arrays.deepToString(matrixBody);
-        String expectedBodyStr = Arrays.deepToString(matrix.getBody());
 
         int actualColumns = matrix.getColumns();
         int actualRows = matrix.getRows();
 
 
-        Assertions.assertEquals(expectedBodyStr, actualBodyStr);
+        Assertions.assertTrue(matrix.equals(matrixBody));
         Assertions.assertEquals(givenColumns, actualColumns);
         Assertions.assertEquals(givenRows, actualRows);
     }
@@ -70,14 +66,11 @@ public class MatrixTest {
         int givenRows = matrixBody.length;
         int givenColumns = matrixBody[0].length;
 
-        String actualBodyStr = Arrays.deepToString(matrixBody);
-        String expectedBodyStr = Arrays.deepToString(matrix.getBody());
-
         int actualColumns = matrix.getColumns();
         int actualRows = matrix.getRows();
 
 
-        Assertions.assertEquals(expectedBodyStr, actualBodyStr);
+        Assertions.assertTrue(matrix.equals(matrixBody));
         Assertions.assertEquals(givenColumns, actualColumns);
         Assertions.assertEquals(givenRows, actualRows);
     }
@@ -93,10 +86,7 @@ public class MatrixTest {
                 {0.0, 0.0, 0.0, 0.0}
         };
 
-        String actualBodyStr = Arrays.deepToString(matrix.getBody());
-        String expectedBodyStr = Arrays.deepToString(expectedBody);
-
-        Assertions.assertEquals(expectedBodyStr, actualBodyStr);
+        Assertions.assertTrue(matrix.equals(expectedBody));
 
     }
 
@@ -128,6 +118,22 @@ public class MatrixTest {
         int dim[] = matrix.getDimensity();
         Assertions.assertEquals(2, dim[0]);
         Assertions.assertEquals(3, dim[1]);
+    }
+
+    @Test
+    void hashCodeTest(){
+        Matrix matrix1 = new Matrix(3,4);
+        matrix1.setValue(1,4, 2232.3235);
+        matrix1.setValue(3,2, 323.32);
+
+        Matrix matrix2 = new Matrix(3,4);
+        matrix2.setValue(1,4, 2232.3235);
+        matrix2.setValue(3,2, 323.32);
+
+        boolean cond1 = matrix1.equals(matrix2);
+        boolean cond2 = matrix1.hashCode() == matrix2.hashCode();
+        Assertions.assertTrue(cond1);
+        Assertions.assertTrue(cond2);
     }
 
 
