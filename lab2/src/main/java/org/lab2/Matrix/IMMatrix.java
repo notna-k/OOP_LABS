@@ -1,44 +1,39 @@
-
-
-
 package org.lab2.Matrix;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
-public class Matrix implements MatrixInterface {
-    private int rows;
-    private int columns;
-    private Double[][] body;
+public class IMMatrix implements MatrixInterface {
+    private final int rows;
+    private final int columns;
+    private final Double[][] body;
 
     private final int prime = 31;
 
-    public Matrix() {
+    public IMMatrix() {
+        this.rows = 0;
+        this.columns = 0;
         this.body = new Double[0][0];
     }
 
-    public Matrix(int rows, int columns) {
+    public IMMatrix(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
         this.body = new Double[rows][columns];
         setZeros();
     }
 
-    public Matrix(Double[][] matrix) {
+    public IMMatrix(Double[][] matrix) {
         this.rows = matrix.length;
         this.columns = matrix[0].length;
         this.body = new Double[rows][columns];
 
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                this.body[i][j] = matrix[i][j];
-            }
+            System.arraycopy(matrix[i], 0, this.body[i], 0, columns);
         }
     }
 
-    public Matrix(double[][] matrix) {
+    public IMMatrix(double[][] matrix) {
         this.rows = matrix.length;
         this.columns = matrix[0].length;
         this.body = new Double[rows][columns];
@@ -59,40 +54,10 @@ public class Matrix implements MatrixInterface {
     }
 
     public Double[][] getBody() {
-        return this.body;
+        return Arrays.copyOf(this.body, this.body.length);
     }
 
 
-    public void setValue(int row, int column, Double value) {
-        if (row < 0 || row > this.rows || column < 0 || column > this.columns) {
-            throw new IndexOutOfBoundsException("Invalid row or column index!");
-        }
-        this.body[row - 1][column - 1] = value;
-    }
-
-    public void setMatrix(Double[][] matrix) {
-        this.rows = matrix.length;
-        this.columns = matrix[0].length;
-        this.body = new Double[rows][columns];
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                this.body[i][j] = matrix[i][j];
-            }
-        }
-    }
-
-    public void setMatrix(double[][] matrix) {
-        this.rows = matrix.length;
-        this.columns = matrix[0].length;
-        this.body = new Double[rows][columns];
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                this.body[i][j] = matrix[i][j];
-            }
-        }
-    }
 
     public int[] getDimensity() {
         int[] dim = new int[2];
@@ -147,38 +112,33 @@ public class Matrix implements MatrixInterface {
     }
 
     public Double[] getRow(int row) {
-        Double[] Row = new Double[this.columns];
-        for(int i = 0; i < this.columns; i++){
-            Row[i] = this.body[row][i];
-        }
-        return Row;
+        return Arrays.copyOf(this.body[row - 1], this.columns);
     }
 
-    public Double[] getColumn(int row) {
-        Double[] Column = new Double[this.rows];
-        for (int i = 0; i < this.rows; i++) {
-            Column[i] = this.body[i][row];
-        }
-        return Column;
+    public Double[] getColumn(int column) {
+        return Arrays.copyOf(this.body[column - 1], this.columns);
     }
 
-
-    public void add(Matrix matrix){
+    public Double[][] add(IMMatrix matrix){
         if (matrix.rows != this.rows || matrix.columns != this.columns) throw new IllegalArgumentException("Matrices demensities don't match");
+        Double[][] newMatrix = this.getBody();
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.columns; j++){
-                this.body[i][j] += matrix.body[i][j];
+                newMatrix[i][j] += matrix.body[i][j];
             }
         }
+        return newMatrix;
 
     }
 
-    public void multiply(double scalar){
+    public Double[][] multiply(double scalar){
+        Double[][] newMatrix = this.getBody();
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.columns; j++){
-                this.body[i][j] *= scalar;
+                newMatrix[i][j] *= scalar;
             }
         }
+        return newMatrix;
 
     }
 
@@ -191,22 +151,8 @@ public class Matrix implements MatrixInterface {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    @Override
-    public boolean equals(Object obj) {
+    public boolean equals(IMMatrix matrix) {
         try {
-            Matrix matrix = (Matrix) obj;
-
             for (int i = 0; i < this.rows; i++) {
                 for (int j = 0; j < this.columns; j++) {
                     if (!this.body[i][j].equals(matrix.getBody()[i][j])) {
@@ -217,10 +163,19 @@ public class Matrix implements MatrixInterface {
 
             return true;
         } catch (ClassCastException | NullPointerException | ArrayIndexOutOfBoundsException e) {
-            System.out.println(e);
             return false;
         }
     }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -234,23 +189,6 @@ public class Matrix implements MatrixInterface {
 
         return result;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private int calculateBodyHashCode() {
         int bodyHashCode = 1;
@@ -288,4 +226,3 @@ public class Matrix implements MatrixInterface {
         }
     }
 }
-

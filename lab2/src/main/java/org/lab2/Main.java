@@ -44,11 +44,11 @@ public class Main {
 
         try {
             if (command.equals("column")) {
-                double[] column = matrix.getColumn(value);
+                Double[] column = matrix.getColumn(value);
                 System.out.println(Arrays.toString(column));
 
             } else if (command.equals("row")) {
-                double[] row = matrix.getRow(value);
+                Double[] row = matrix.getRow(value);
                 System.out.println(Arrays.toString(row));
             } else System.out.println("Invalid input");
 

@@ -13,13 +13,6 @@ public class MatrixTest {
 
 
     @Test
-    void emptyMatrixTest(){
-        Matrix matrix = new Matrix();
-
-        Assertions.assertTrue(matrix.equals(new Double[0][0]));
-    }
-
-    @Test
     void definedSizeMatrixTest(){
         Matrix matrix = new Matrix(3,3);
         double[][] expectedBody = {
@@ -33,7 +26,7 @@ public class MatrixTest {
 
     @Test
     void copiedMatrixTest(){
-        double[][] matrixBody = {
+        Double[][] matrixBody = {
                 {0.1, 0.23, 223.2, 23.0},
                 {12.2, 23.1, 34.2, 0.001}
         };
@@ -48,32 +41,10 @@ public class MatrixTest {
         int actualRows = matrix.getRows();
 
 
-        Assertions.assertTrue(matrix.equals(matrixBody));
         Assertions.assertEquals(givenColumns, actualColumns);
         Assertions.assertEquals(givenRows, actualRows);
     }
 
-    @Test
-    void setMatrixTest(){
-        double[][] matrixBody = {
-                {0.1, 0.23, 223.2, 23.0},
-                {12.2, 23.1, 34.2, 0.001}
-        };
-
-        Matrix matrix = new Matrix();
-        matrix.setMatrix(matrixBody);
-
-        int givenRows = matrixBody.length;
-        int givenColumns = matrixBody[0].length;
-
-        int actualColumns = matrix.getColumns();
-        int actualRows = matrix.getRows();
-
-
-        Assertions.assertTrue(matrix.equals(matrixBody));
-        Assertions.assertEquals(givenColumns, actualColumns);
-        Assertions.assertEquals(givenRows, actualRows);
-    }
 
     @Test
     void setMatrixValuesTest(){
@@ -85,8 +56,9 @@ public class MatrixTest {
                 {0.0, 0.0, 0.0, 0.0},
                 {0.0, 0.0, 0.0, 0.0}
         };
+        Matrix expectedMatrix = new Matrix(expectedBody);
 
-        Assertions.assertTrue(matrix.equals(expectedBody));
+        Assertions.assertTrue(matrix.equals(expectedMatrix));
 
     }
 
@@ -94,7 +66,7 @@ public class MatrixTest {
     void getRowTest(){
         Matrix matrix = new Matrix(2,3);
 
-        double[] expectedRow = {0.0, 0.0, 0.0};
+        Double[] expectedRow = {0.0, 0.0, 0.0};
 
         String expectedBodyStr = Arrays.toString(expectedRow);
         String actualBodyStr = Arrays.toString(matrix.getRow(1));
@@ -105,7 +77,7 @@ public class MatrixTest {
     void getColumnTest(){
         Matrix matrix = new Matrix(2,3);
 
-        double[] expectedColumn = {0.0, 0.0};
+        Double[] expectedColumn = {0.0, 0.0};
 
         String expectedBodyStr = Arrays.toString(expectedColumn);
         String actualBodyStr = Arrays.toString(matrix.getColumn(1));
@@ -136,6 +108,52 @@ public class MatrixTest {
         Assertions.assertTrue(cond2);
     }
 
+    @Test
+    void addMatrixTest(){
+        Double[][] matrixBody = {
+                {100.0, 23.0, 223.0, 23.0},
+                {12.2, 23.1, 340.0, 0.001}
+        };
+
+        Double[][] expectedMatrix2Body = {
+                {-900.0, 23.0, -777.0, 23.0},
+                {12.2, 23.1, -660.0, 0.001}
+        };
+
+
+        Matrix matrix = new Matrix(matrixBody);
+        Matrix matrix2 = new Matrix(2,4);
+        Matrix expectedMatrix =  new Matrix(expectedMatrix2Body);
+
+        matrix2.setValue(1, 3, -1000.0);
+        matrix2.setValue(2, 3, -1000.0);
+        matrix2.setValue(1, 1, -1000.0);
+
+
+
+
+        matrix.add(matrix2);
+        Assertions.assertTrue(matrix.equals(expectedMatrix));
+
+    }
+
+    @Test
+    void multiplyMatrixTest(){
+        Double[][] matrixBody = {
+                {100.0, 23.0, 223.0, 23.0},
+                {12.2, 23.1, 340.0, 0.001}
+        };
+
+        Double[][] expectedMatrixBody = {
+                {200.0, 46.0, 446.0, 46.0},
+                {24.4, 46.2, 680.0, 0.002}
+        };
+        Matrix matrix = new Matrix(matrixBody);
+        Matrix expectedMatrix = new Matrix(expectedMatrixBody);
+
+        matrix.multiply(2);
+        Assertions.assertTrue(matrix.equals(expectedMatrix));
+    }
 
 
 
