@@ -120,4 +120,21 @@ public class IMMatrixTest {
         Assertions.assertTrue(actualMatrix.equals(expectedMatrix));
 
     }
+
+    @Test
+    void onesMatrixTest(){
+        int dimensity = 3;
+
+        Double[][] expectedBody = {
+                {1.0, 0.0, 0.0},
+                {0.0, 1.0, 0.0},
+                {0.0, 0.0, 1.0}
+        };
+
+        IMMatrix expectedMatrix = new IMMatrix(expectedBody);
+        IMMatrix actualMatrix = IMMatrix.createOnesMatrix(dimensity);
+
+        Assertions.assertTrue(actualMatrix.equals(expectedMatrix));
+
+    }
 }

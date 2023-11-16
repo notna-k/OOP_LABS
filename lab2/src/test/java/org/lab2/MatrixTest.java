@@ -217,6 +217,23 @@ public class MatrixTest {
 
     }
 
+    @Test
+    void onesMatrixTest(){
+        int dimensity = 3;
+
+        Double[][] expectedBody = {
+                {1.0, 0.0, 0.0},
+                {0.0, 1.0, 0.0},
+                {0.0, 0.0, 1.0}
+        };
+
+        Matrix expectedMatrix = new Matrix(expectedBody);
+        Matrix actualMatrix = Matrix.createOnesMatrix(dimensity);
+
+        Assertions.assertTrue(actualMatrix.equals(expectedMatrix));
+
+    }
+
 
 
 }

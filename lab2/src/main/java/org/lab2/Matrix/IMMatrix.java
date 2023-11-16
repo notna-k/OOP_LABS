@@ -190,6 +190,14 @@ public class IMMatrix implements MatrixInterface {
         return new IMMatrix(diagonalMatrix);
     }
 
+    public static IMMatrix createOnesMatrix(int dimensity){
+        Double[] vector = new Double[dimensity];
+        for(int i = 0; i < dimensity; i++){
+            vector[i] = 1.0;
+        }
+        return createDiagonalMatrix(vector);
+    }
+
 
     public IMMatrix transpose() {
         Double[][] transposed = new Double[this.columns][this.rows];

@@ -244,6 +244,14 @@ public class Matrix implements MatrixInterface {
         return new Matrix(diagonalMatrix);
     }
 
+    public static Matrix createOnesMatrix(int dimensity){
+        Double[] vector = new Double[dimensity];
+        for(int i = 0; i < dimensity; i++){
+            vector[i] = 1.0;
+        }
+        return createDiagonalMatrix(vector);
+    }
+
 
 
 
