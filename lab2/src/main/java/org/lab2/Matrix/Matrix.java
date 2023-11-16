@@ -19,6 +19,12 @@ public class Matrix implements MatrixInterface {
         this.body = new Double[0][0];
     }
 
+    public Matrix(IMMatrix immatrix){
+        this.body = immatrix.getBody();
+        this.columns = immatrix.getColumns();
+        this.rows = immatrix.getRows();
+    }
+
     public Matrix(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
@@ -204,8 +210,17 @@ public class Matrix implements MatrixInterface {
     }
 
 
+    public Matrix transpose() {
+        Double[][] transposed = new Double[this.columns][this.rows];
 
+        for (int i = 0; i < this.columns; i++) {
+            for (int j = 0; j < this.rows; j++) {
+                transposed[i][j] = this.body[j][i];
+            }
+        }
 
+        return new Matrix(transposed);
+    }
 
 
 

@@ -3,6 +3,7 @@ package org.lab2;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.lab2.Matrix.IMMatrix;
 import org.lab2.Matrix.Matrix;
 
 import java.lang.reflect.Array;
@@ -162,7 +163,8 @@ public class MatrixTest {
                 {30.0, 4.0},
         };
         Double[][] matrix2Body = {
-                {3.0, 5.0},
+                {3.0},
+                {5.0}
         };
 
         Double[][] expectedBody = {
@@ -180,7 +182,23 @@ public class MatrixTest {
         Assertions.assertTrue(matrix.equals(expectedMatrix));
 
     }
+    @Test
+    void transposeMatrixTest(){
+        Double[][] matrixBody = {
+                {20.0, 13.0},
+                {30.0, 4.0},
+        };
+        Double[][] transposedMatrixBody = {
+                {20.0, 30.0},
+                {13.0, 4.0},
+        };
 
+        Matrix matrix = new Matrix(matrixBody);
+        Matrix transposedMatrix = new Matrix(transposedMatrixBody);
+        Matrix actualTransposedMatrix = matrix.transpose();
+
+        Assertions.assertTrue(actualTransposedMatrix.equals(transposedMatrix));
+    }
 
 
 

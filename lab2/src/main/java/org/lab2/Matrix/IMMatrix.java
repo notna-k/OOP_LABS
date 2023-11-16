@@ -16,6 +16,12 @@ public class IMMatrix implements MatrixInterface {
         this.body = new Double[0][0];
     }
 
+    public IMMatrix(Matrix matrix){
+        this.body = matrix.getBody();
+        this.columns = matrix.getColumns();
+        this.rows = matrix.getRows();
+    }
+
     public IMMatrix(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
@@ -142,7 +148,7 @@ public class IMMatrix implements MatrixInterface {
 
     }
 
-    public Double[][] multiply(IMMatrix matrix){
+    public IMMatrix multiply(IMMatrix matrix){
         if(matrix.rows != this.columns) throw new IllegalArgumentException("Matrices demensities don't match");
 
         Double[][] result = new Double[this.rows][matrix.columns];
@@ -157,8 +163,27 @@ public class IMMatrix implements MatrixInterface {
             }
         }
 
-        return result;
+        return new IMMatrix(result);
     }
+
+
+    public IMMatrix transpose() {
+        Double[][] transposed = new Double[this.columns][this.rows];
+
+        for (int i = 0; i < this.columns; i++) {
+            for (int j = 0; j < this.rows; j++) {
+                transposed[i][j] = this.body[j][i];
+            }
+        }
+
+        return new IMMatrix(transposed);
+    }
+
+
+
+
+
+
 
 
 

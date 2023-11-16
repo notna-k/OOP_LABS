@@ -79,10 +79,28 @@ public class IMMatrixTest {
 
         IMMatrix expectedMatrix = new IMMatrix(expectedBody);
 
-        IMMatrix actual = new IMMatrix(matrix.multiply(matrix2));
+        IMMatrix actual = matrix.multiply(matrix2);
 
 
         Assertions.assertTrue(actual.equals(expectedMatrix));
 
+    }
+
+    @Test
+    void transposeMatrixTest(){
+        Double[][] matrixBody = {
+                {20.0, 13.0},
+                {30.0, 4.0},
+        };
+        Double[][] transposedMatrixBody = {
+                {20.0, 30.0},
+                {13.0, 4.0},
+        };
+
+        IMMatrix imMatrix = new IMMatrix(matrixBody);
+        IMMatrix transposedMatrix = new IMMatrix(transposedMatrixBody);
+        IMMatrix actualTransposedMatrix = imMatrix.transpose();
+
+        Assertions.assertTrue(actualTransposedMatrix.equals(transposedMatrix));
     }
 }
