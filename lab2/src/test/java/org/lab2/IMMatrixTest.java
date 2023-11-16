@@ -103,4 +103,21 @@ public class IMMatrixTest {
 
         Assertions.assertTrue(actualTransposedMatrix.equals(transposedMatrix));
     }
+
+    @Test
+    void diagonalMatrixTest(){
+        Double[] vector = {1.23, 14.5, 0.0};
+
+        Double[][] expectedBody = {
+                {1.23, 0.0, 0.0},
+                {0.0, 14.5, 0.0},
+                {0.0, 0.0, 0.0}
+        };
+
+        IMMatrix expectedMatrix = new IMMatrix(expectedBody);
+        IMMatrix actualMatrix = IMMatrix.createDiagonalMatrix(vector);
+
+        Assertions.assertTrue(actualMatrix.equals(expectedMatrix));
+
+    }
 }

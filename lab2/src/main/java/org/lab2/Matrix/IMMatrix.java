@@ -167,6 +167,30 @@ public class IMMatrix implements MatrixInterface {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+    public static IMMatrix createDiagonalMatrix(Double[] vector) {
+        int size = vector.length;
+        Double[][] diagonalMatrix = new Double[size][size];
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                diagonalMatrix[i][j] = (i == j) ? vector[i] : 0.0;
+            }
+        }
+
+        return new IMMatrix(diagonalMatrix);
+    }
+
+
     public IMMatrix transpose() {
         Double[][] transposed = new Double[this.columns][this.rows];
 

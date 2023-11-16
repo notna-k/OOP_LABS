@@ -200,6 +200,23 @@ public class MatrixTest {
         Assertions.assertTrue(actualTransposedMatrix.equals(transposedMatrix));
     }
 
+    @Test
+    void diagonalMatrixTest(){
+        Double[] vector = {1.23, 14.5, 0.0};
+
+        Double[][] expectedBody = {
+                {1.23, 0.0, 0.0},
+                {0.0, 14.5, 0.0},
+                {0.0, 0.0, 0.0}
+        };
+
+        Matrix expectedMatrix = new Matrix(expectedBody);
+        Matrix actualMatrix = Matrix.createDiagonalMatrix(vector);
+
+        Assertions.assertTrue(actualMatrix.equals(expectedMatrix));
+
+    }
+
 
 
 }
