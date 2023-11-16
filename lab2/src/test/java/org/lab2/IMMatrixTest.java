@@ -57,4 +57,32 @@ public class IMMatrixTest {
 
         Assertions.assertTrue(expectedMatrix.equals(resMatrix));
     }
+
+    @Test
+    void multiplyOnMatrixTest(){
+        Double[][] matrixBody = {
+                {20.0, 13.0},
+                {30.0, 4.0},
+        };
+        Double[][] matrix2Body = {
+                {3.0},
+                {5.0}
+        };
+
+        Double[][] expectedBody = {
+                {125.0},
+                {110.0},
+        };
+
+        IMMatrix matrix = new IMMatrix(matrixBody);
+        IMMatrix matrix2 = new IMMatrix(matrix2Body);
+
+        IMMatrix expectedMatrix = new IMMatrix(expectedBody);
+
+        IMMatrix actual = new IMMatrix(matrix.multiply(matrix2));
+
+
+        Assertions.assertTrue(actual.equals(expectedMatrix));
+
+    }
 }

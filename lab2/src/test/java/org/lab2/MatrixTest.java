@@ -138,7 +138,7 @@ public class MatrixTest {
     }
 
     @Test
-    void multiplyMatrixTest(){
+    void multiplyOnScalarTest(){
         Double[][] matrixBody = {
                 {100.0, 23.0, 223.0, 23.0},
                 {12.2, 23.1, 340.0, 0.001}
@@ -155,6 +155,31 @@ public class MatrixTest {
         Assertions.assertTrue(matrix.equals(expectedMatrix));
     }
 
+    @Test
+    void multiplyOnMatrixTest(){
+        Double[][] matrixBody = {
+                {20.0, 13.0},
+                {30.0, 4.0},
+        };
+        Double[][] matrix2Body = {
+                {3.0, 5.0},
+        };
+
+        Double[][] expectedBody = {
+                {125.0},
+                {110.0},
+        };
+
+        Matrix matrix = new Matrix(matrixBody);
+        Matrix matrix2 = new Matrix(matrix2Body);
+
+        Matrix expectedMatrix = new Matrix(expectedBody);
+
+        matrix.multiply(matrix2);
+
+        Assertions.assertTrue(matrix.equals(expectedMatrix));
+
+    }
 
 
 

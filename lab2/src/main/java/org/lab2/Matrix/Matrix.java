@@ -182,6 +182,27 @@ public class Matrix implements MatrixInterface {
 
     }
 
+    public void multiply(Matrix matrix){
+        if(matrix.rows != this.columns) throw new IllegalArgumentException("Matrices demensities don't match");
+
+        Double[][] result = new Double[this.rows][matrix.columns];
+
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < matrix.columns; j++) {
+                Double sum = 0.0;
+                for (int k = 0; k < this.columns; k++) {
+                    sum += this.body[i][k] * matrix.body[k][j];
+                }
+                result[i][j] = sum;
+            }
+        }
+
+        // Update the current matrix with the result
+        this.rows = result.length;
+        this.columns = result[0].length;
+        this.body = result;
+    }
+
 
 
 
