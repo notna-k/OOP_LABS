@@ -244,7 +244,64 @@ public class IMMatrix implements MatrixInterface {
         return new IMMatrix(result);
     }
 
+    public IMMatrix convertToUpperTriangular() {
+        Double[][] bodyClone = this.body;
+        for (int i = 0; i < this.rows - 1; i++) {
+            if (bodyClone[i][i] == 0.0) {
+                boolean found = false;
+                for (int k = i + 1; k < this.rows; k++) {
+                    if (bodyClone[k][i] != 0.0) {
+                        swapRows(bodyClone, i, k);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) continue;
+            }
 
+            for (int j = i + 1; j < this.rows; j++) {
+                double factor = bodyClone[j][i] / bodyClone[i][i];
+                for (int k = i; k < this.columns; k++) {
+                    bodyClone[j][k] -= factor * bodyClone[i][k];
+                }
+            }
+        }
+        return new IMMatrix(bodyClone);
+    }
+
+    public IMMatrix convertToLowerTriangular() {
+        Double[][] bodyClone = this.body;
+
+        for (int i = rows - 1; i > 0; i--) {
+            if (bodyClone[i][i] == 0.0) {
+                boolean found = false;
+                for (int k = i - 1; k >= 0; k--) {
+                    if (bodyClone[k][i] != 0.0) {
+                        bodyClone = swapRows(bodyClone, i, k);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) continue;
+            }
+
+            for (int j = i - 1; j >= 0; j--) {
+                double factor = bodyClone[j][i] / bodyClone[i][i];
+                for (int k = i; k < columns; k++) {
+                    bodyClone[j][k] -= factor * bodyClone[i][k];
+                }
+            }
+        }
+
+        return new IMMatrix(bodyClone);
+    }
+
+    private Double[][] swapRows(Double[][] matrix, int row1, int row2) {
+        Double[] temp = matrix[row1];
+        matrix[row1] = matrix[row2];
+        matrix[row2] = temp;
+        return matrix;
+    }
 
 
 

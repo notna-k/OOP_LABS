@@ -150,4 +150,24 @@ public class IMMatrixTest {
         System.out.println("Random matrix column: ");
         matrix.printMatrix();
     }
+
+    @Test
+    void upperTriangularMatrixTest() {
+        Double[][] body = {
+                {1.0, 1.0, 2.0},
+                {2.0, 0.0, 1.0},
+                {1.0, 2.0, 1.0}
+        };
+        Double[][] expectedBody = {
+                {1.0, 1.0, 2.0},
+                {0.0, -2.0, -3.0},
+                {0.0, 0.0, -2.5}
+        };
+
+        IMMatrix matrix = new IMMatrix(body);
+        IMMatrix actual = matrix.convertToUpperTriangular();
+        IMMatrix expected = new IMMatrix(expectedBody);
+        Assertions.assertTrue(expected.equals(actual));
+    }
+
 }

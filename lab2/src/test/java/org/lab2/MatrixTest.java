@@ -16,7 +16,7 @@ public class MatrixTest {
     @Test
     void definedSizeMatrixTest(){
         Matrix matrix = new Matrix(3,3);
-        double[][] expectedBody = {
+        Double[][] expectedBody = {
                 {0.0, 0.0, 0.0},
                 {0.0, 0.0, 0.0},
                 {0.0, 0.0, 0.0}
@@ -247,6 +247,29 @@ public class MatrixTest {
         System.out.println("Random matrix column: ");
         matrix.printMatrix();
     }
+
+    @Test
+    void upperTriangularMatrixTest(){
+        Double[][] body = {
+                {1.0, 1.0, 2.0},
+                {2.0, 0.0, 1.0},
+                {1.0, 2.0, 1.0}
+        };
+        Double[][] expectedBody = {
+                {1.0, 1.0, 2.0},
+                {0.0, -2.0, -3.0},
+                {0.0, 0.0, -2.5}
+        };
+        Matrix expectedMatrix = new Matrix(expectedBody);
+
+        Matrix matrix = new Matrix(body);
+        matrix.convertToUpperTriangular();
+        Assertions.assertTrue(matrix.equals(expectedMatrix));
+
+    }
+
+
+
 
 
 

@@ -210,6 +210,61 @@ public class Matrix implements MatrixInterface {
         this.body = result;
     }
 
+    public void convertToUpperTriangular() {
+        for (int i = 0; i < this.rows - 1; i++) {
+            if (this.body[i][i] == 0.0) {
+                boolean found = false;
+                for (int k = i + 1; k < this.rows; k++) {
+                    if (this.body[k][i] != 0.0) {
+                        swapRows(i, k);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) continue;
+            }
+
+            for (int j = i + 1; j < this.rows; j++) {
+                double factor = this.body[j][i] / this.body[i][i];
+                for (int k = i; k < this.columns; k++) {
+                    this.body[j][k] -= factor * this.body[i][k];
+                }
+            }
+        }
+    }
+
+    public void convertToLowerTriangular() {
+        for (int i = rows - 1; i > 0; i--) {
+            if (this.body[i][i] == 0.0) {
+                boolean found = false;
+                for (int k = i - 1; k >= 0; k--) {
+                    if (this.body[k][i] != 0.0) {
+                        swapRows(i, k);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) continue;
+            }
+
+            for (int j = i - 1; j >= 0; j--) {
+                double factor = this.body[j][i] / this.body[i][i];
+                for (int k = i; k < columns; k++) {
+                    this.body[j][k] -= factor * this.body[i][k];
+                }
+            }
+        }
+    }
+
+
+    private void swapRows(int row1, int row2) {
+        Double[] temp = this.body[row1];
+        this.body[row1] = this.body[row2];
+        this.body[row2] = temp;
+    }
+
+
+
 
     public Matrix transpose() {
         Double[][] transposed = new Double[this.columns][this.rows];
