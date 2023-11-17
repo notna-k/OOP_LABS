@@ -234,6 +234,13 @@ public class MatrixTest {
 
     }
 
+    @Test
+    void randomRowMatrixTest(){
+        Matrix matrix = Matrix.randomRowMatrix(4);
+        System.out.println("Random matrix row: ");
+        matrix.printMatrix();
+    }
+
 
 
 }

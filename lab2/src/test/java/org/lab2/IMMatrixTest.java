@@ -137,4 +137,10 @@ public class IMMatrixTest {
         Assertions.assertTrue(actualMatrix.equals(expectedMatrix));
 
     }
+    @Test
+    void randomRowMatrixTest(){
+        IMMatrix matrix = IMMatrix.randomRowMatrix(4);
+        System.out.println("Random matrix row: ");
+        matrix.printMatrix();
+    }
 }

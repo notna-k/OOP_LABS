@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 public class Matrix implements MatrixInterface {
     private int rows;
@@ -252,6 +253,22 @@ public class Matrix implements MatrixInterface {
         return createDiagonalMatrix(vector);
     }
 
+
+    public static Matrix randomRowMatrix(int length, double... range) {
+        double min = range.length > 0 ? range[0] : -100.0;
+        double max = range.length > 1 ? range[1] : 100.0;
+
+        //default values if range doesn't provided
+
+        Random random = new Random();
+        Double[][] result = new Double[1][length];
+
+        for (int i = 0; i < length; i++) {
+            result[0][i] = min + (max - min) * random.nextDouble();
+        }
+
+        return new Matrix(result);
+    }
 
 
 
