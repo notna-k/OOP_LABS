@@ -268,6 +268,57 @@ public class MatrixTest {
 
     }
 
+    /*@Test
+    void inverseMatrixTest(){
+        Double[][] body = {
+                {1.0, 1.0, 2.0},
+                {2.0, 0.0, 1.0},
+                {1.0, 2.0, 1.0}
+        };
+        Double[][] expectedBody = {
+                {-0.4, 0.6, 0.2},
+                {-0.2, -0.2, 0.6},
+                {0.8, -0.2, -0.4}
+        };
+        Matrix matrix = new Matrix(body);
+        Matrix expectedMatrix = new Matrix(expectedBody);
+        Matrix inversed = matrix.inverseMatrix();
+        inversed.printMatrix();
+        expectedMatrix.printMatrix();
+        Assertions.assertTrue(expectedMatrix.equals(inversed));
+
+    }*/
+    @Test
+    void inverseMatrixTest() {
+        Double[][] body = {
+                {1.0, 1.0, 2.0},
+                {2.0, 0.0, 1.0},
+                {1.0, 2.0, 1.0}
+        };
+        Double[][] expectedBody = {
+                {-0.4, 0.6, 0.2},
+                {-0.2, -0.2, 0.6},
+                {0.8, -0.2, -0.4}
+        };
+        Matrix matrix = new Matrix(body);
+        Matrix expectedMatrix = new Matrix(expectedBody);
+        Matrix inversed = matrix.inverseMatrix();
+
+        // Check dimensions
+        Assertions.assertEquals(expectedMatrix.getRows(), inversed.getRows());
+        Assertions.assertEquals(expectedMatrix.getColumns(), inversed.getColumns());
+
+        // Check element-wise similarity within a tolerance
+        double tolerance = 1e-6;
+        for (int i = 0; i < expectedMatrix.getRows(); i++) {
+            for (int j = 0; j < expectedMatrix.getColumns(); j++) {
+                double diff = Math.abs(expectedMatrix.getElement(i, j) - inversed.getElement(i, j));
+                Assertions.assertTrue(diff < tolerance, "Values differ at row " + i + ", column " + j + ": Expected " +
+                        expectedMatrix.getElement(i, j) + " but got " + inversed.getElement(i, j));
+            }
+        }
+    }
+
 
 
 

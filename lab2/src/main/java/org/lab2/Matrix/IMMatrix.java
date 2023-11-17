@@ -287,7 +287,7 @@ public class IMMatrix implements MatrixInterface {
 
             for (int j = i - 1; j >= 0; j--) {
                 double factor = bodyClone[j][i] / bodyClone[i][i];
-                for (int k = i; k < columns; k++) {
+                for (int k = i; k < this.columns; k++) {
                     bodyClone[j][k] -= factor * bodyClone[i][k];
                 }
             }
@@ -301,6 +301,62 @@ public class IMMatrix implements MatrixInterface {
         matrix[row1] = matrix[row2];
         matrix[row2] = temp;
         return matrix;
+    }
+
+    public IMMatrix inverseMatrix() {
+        if (this.rows != this.columns) {
+            throw new IllegalArgumentException("Matrix must be square to find its inverse");
+        }
+
+        int n = this.rows;
+        Double[][] augmentedMatrix = new Double[n][2 * n];
+
+        // Create the augmented matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                augmentedMatrix[i][j] = this.body[i][j];
+                augmentedMatrix[i][j + n] = (i == j) ? 1.0 : 0.0;
+            }
+        }
+
+        // Gauss-Jordan elimination
+        for (int i = 0; i < n; i++) {
+            if (augmentedMatrix[i][i] == 0.0) {
+                boolean found = false;
+                for (int k = i + 1; k < n; k++) {
+                    if (augmentedMatrix[k][i] != 0.0) {
+                        found = true;
+                        augmentedMatrix = swapRows(augmentedMatrix, i, k);
+                        break;
+                    }
+                }
+                if (!found) {
+                    throw new IllegalArgumentException("Matrix is singular, inverse does not exist");
+                }
+            }
+
+            double factor = augmentedMatrix[i][i];
+            for (int j = 0; j < 2 * n; j++) {
+                augmentedMatrix[i][j] /= factor;
+            }
+
+            for (int k = 0; k < n; k++) {
+                if (k != i) {
+                    factor = augmentedMatrix[k][i];
+                    for (int j = 0; j < 2 * n; j++) {
+                        augmentedMatrix[k][j] -= factor * augmentedMatrix[i][j];
+                    }
+                }
+            }
+        }
+
+        // Extract the inverse matrix
+        Double[][] inverse = new Double[n][n];
+        for (int i = 0; i < n; i++) {
+            System.arraycopy(augmentedMatrix[i], n, inverse[i], 0, n);
+        }
+
+        return new IMMatrix(inverse);
     }
 
 

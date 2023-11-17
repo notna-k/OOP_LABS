@@ -216,7 +216,7 @@ public class Matrix implements MatrixInterface {
                 boolean found = false;
                 for (int k = i + 1; k < this.rows; k++) {
                     if (this.body[k][i] != 0.0) {
-                        swapRows(i, k);
+                        this.body = swapRows(this.body, i, k);
                         found = true;
                         break;
                     }
@@ -239,7 +239,7 @@ public class Matrix implements MatrixInterface {
                 boolean found = false;
                 for (int k = i - 1; k >= 0; k--) {
                     if (this.body[k][i] != 0.0) {
-                        swapRows(i, k);
+                        this.body = swapRows(this.body, i, k);
                         found = true;
                         break;
                     }
@@ -257,10 +257,11 @@ public class Matrix implements MatrixInterface {
     }
 
 
-    private void swapRows(int row1, int row2) {
-        Double[] temp = this.body[row1];
-        this.body[row1] = this.body[row2];
-        this.body[row2] = temp;
+    private Double[][] swapRows(Double[][] matrix, int row1, int row2) {
+        Double[] temp = matrix[row1];
+        matrix[row1] = matrix[row2];
+        matrix[row2] = temp;
+        return matrix;
     }
 
 
@@ -341,13 +342,61 @@ public class Matrix implements MatrixInterface {
         return new Matrix(result);
     }
 
+    public Matrix inverseMatrix() {
+        if (this.rows != this.columns) {
+            throw new IllegalArgumentException("Matrix must be square to find its inverse");
+        }
 
+        int n = this.rows;
+        Double[][] augmentedMatrix = new Double[n][2 * n];
 
+        // Create the augmented matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                augmentedMatrix[i][j] = this.body[i][j];
+                augmentedMatrix[i][j + n] = (i == j) ? 1.0 : 0.0;
+            }
+        }
 
+        // Gauss-Jordan elimination
+        for (int i = 0; i < n; i++) {
+            if (augmentedMatrix[i][i] == 0.0) {
+                boolean found = false;
+                for (int k = i + 1; k < n; k++) {
+                    if (augmentedMatrix[k][i] != 0.0) {
+                        found = true;
+                        augmentedMatrix = swapRows(augmentedMatrix, i, k);
+                        break;
+                    }
+                }
+                if (!found) {
+                    throw new IllegalArgumentException("Matrix is singular, inverse does not exist");
+                }
+            }
 
+            double factor = augmentedMatrix[i][i];
+            for (int j = 0; j < 2 * n; j++) {
+                augmentedMatrix[i][j] /= factor;
+            }
 
+            for (int k = 0; k < n; k++) {
+                if (k != i) {
+                    factor = augmentedMatrix[k][i];
+                    for (int j = 0; j < 2 * n; j++) {
+                        augmentedMatrix[k][j] -= factor * augmentedMatrix[i][j];
+                    }
+                }
+            }
+        }
 
+        // Extract the inverse matrix
+        Double[][] inverse = new Double[n][n];
+        for (int i = 0; i < n; i++) {
+            System.arraycopy(augmentedMatrix[i], n, inverse[i], 0, n);
+        }
 
+        return new Matrix(inverse);
+    }
 
 
 
@@ -371,7 +420,6 @@ public class Matrix implements MatrixInterface {
 
             return true;
         } catch (ClassCastException | NullPointerException | ArrayIndexOutOfBoundsException e) {
-            System.out.println(e);
             return false;
         }
     }
