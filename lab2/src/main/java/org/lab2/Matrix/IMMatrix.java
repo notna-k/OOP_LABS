@@ -228,7 +228,21 @@ public class IMMatrix implements MatrixInterface {
         return new IMMatrix(result);
     }
 
+    public static IMMatrix randomColumnMatrix(int length, double... range) {
+        double min = range.length > 0 ? range[0] : -100.0;
+        double max = range.length > 1 ? range[1] : 100.0;
 
+        //default values if range doesn't provided
+
+        Random random = new Random();
+        Double[][] result = new Double[length][1];
+
+        for (int i = 0; i < length; i++) {
+            result[i][0] = min + (max - min) * random.nextDouble();
+        }
+
+        return new IMMatrix(result);
+    }
 
 
 

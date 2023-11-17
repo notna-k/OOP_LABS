@@ -270,6 +270,22 @@ public class Matrix implements MatrixInterface {
         return new Matrix(result);
     }
 
+    public static Matrix randomColumnMatrix(int length, double... range) {
+        double min = range.length > 0 ? range[0] : -100.0;
+        double max = range.length > 1 ? range[1] : 100.0;
+
+        //default values if range doesn't provided
+
+        Random random = new Random();
+        Double[][] result = new Double[length][1];
+
+        for (int i = 0; i < length; i++) {
+            result[i][0] = min + (max - min) * random.nextDouble();
+        }
+
+        return new Matrix(result);
+    }
+
 
 
 

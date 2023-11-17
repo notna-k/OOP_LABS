@@ -143,4 +143,11 @@ public class IMMatrixTest {
         System.out.println("Random matrix row: ");
         matrix.printMatrix();
     }
+
+    @Test
+    void randomColumnMatrixTest(){
+        IMMatrix matrix = IMMatrix.randomColumnMatrix(3, -20, 1);
+        System.out.println("Random matrix column: ");
+        matrix.printMatrix();
+    }
 }

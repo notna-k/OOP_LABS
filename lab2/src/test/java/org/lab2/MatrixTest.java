@@ -241,6 +241,13 @@ public class MatrixTest {
         matrix.printMatrix();
     }
 
+    @Test
+    void randomColumnMatrixTest(){
+        Matrix matrix = Matrix.randomColumnMatrix(3, -20, 1);
+        System.out.println("Random matrix column: ");
+        matrix.printMatrix();
+    }
+
 
 
 }
