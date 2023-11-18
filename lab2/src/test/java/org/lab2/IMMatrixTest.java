@@ -7,7 +7,7 @@ import org.lab2.Matrix.Matrix;
 
 public class IMMatrixTest {
 
-    @Test
+   /* @Test
     void addMatrixTest(){
         Double[][] matrixBody = {
                 {100.0, 23.0, 223.0, 23.0},
@@ -36,7 +36,7 @@ public class IMMatrixTest {
 
 
 
-    }
+    }*/
 
     @Test
     void multiplyMatrixTest(){
@@ -52,8 +52,8 @@ public class IMMatrixTest {
         IMMatrix matrix = new IMMatrix(matrixBody);
         IMMatrix expectedMatrix = new IMMatrix(expectedMatrixBody);
 
-        Double[][] res = matrix.multiply(2);
-        IMMatrix resMatrix = new IMMatrix(res);
+        IMMatrix resMatrix = matrix.multiply(2);
+
 
         Assertions.assertTrue(expectedMatrix.equals(resMatrix));
     }

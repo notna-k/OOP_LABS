@@ -35,8 +35,13 @@ public class IMMatrix implements MatrixInterface {
         this.columns = matrix[0].length;
         this.body = new Double[rows][columns];
 
-        for (int i = 0; i < rows; i++) {
+        /*for (int i = 0; i < rows; i++) {
             System.arraycopy(matrix[i], 0, this.body[i], 0, columns);
+        }*/
+        for(int i = 0; i < this.rows; i++){
+            for(int j = 0; j < this.columns; j++){
+                this.body[i][j] = matrix[i][j];
+            }
         }
     }
 
@@ -126,26 +131,26 @@ public class IMMatrix implements MatrixInterface {
         return Arrays.copyOf(this.body[column - 1], this.columns);
     }
 
-    public Double[][] add(IMMatrix matrix){
+    public IMMatrix add(IMMatrix matrix){
         if (matrix.rows != this.rows || matrix.columns != this.columns) throw new IllegalArgumentException("Matrices demensities don't match");
-        Double[][] newMatrix = this.getBody();
+        Double[][] newMatrix = new Double[this.rows][this.columns];
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.columns; j++){
-                newMatrix[i][j] += matrix.body[i][j];
+                newMatrix[i][j] = this.body[i][j] + matrix.getBody()[i][j];
             }
         }
-        return newMatrix;
+        return new IMMatrix(newMatrix);
 
     }
 
-    public Double[][] multiply(double scalar){
+    public IMMatrix multiply(double scalar){
         Double[][] newMatrix = this.getBody();
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.columns; j++){
                 newMatrix[i][j] *= scalar;
             }
         }
-        return newMatrix;
+        return new IMMatrix(newMatrix);
 
     }
 

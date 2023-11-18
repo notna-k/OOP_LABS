@@ -326,6 +326,24 @@ public class Matrix implements MatrixInterface {
         return new Matrix(result);
     }
 
+    public void randomMatrix(double... range) {
+        double min = range.length > 0 ? range[0] : -100.0;
+        double max = range.length > 1 ? range[1] : 100.0;
+
+        //default values if range doesn't provided
+
+        Random random = new Random();
+        Double[][] result = new Double[rows][columns];
+
+        for (int i = 0; i < this.rows; i++) {
+            for(int j = 0; j < this.columns; j++){
+                this.body[i][j] = min + (max - min) * random.nextDouble();
+            }
+        }
+
+
+    }
+
     public static Matrix randomColumnMatrix(int length, double... range) {
         double min = range.length > 0 ? range[0] : -100.0;
         double max = range.length > 1 ? range[1] : 100.0;
