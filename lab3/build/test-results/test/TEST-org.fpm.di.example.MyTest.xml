@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.fpm.di.example.MyTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2023-12-22T16:25:41" hostname="fedora" time="0.016">
+  <properties/>
+  <testcase name="shouldThrowBindExceptionWhenTryingToRegisterNull" classname="org.fpm.di.example.MyTest" time="0.002"/>
+  <testcase name="shouldResolveNestedInjectDependency" classname="org.fpm.di.example.MyTest" time="0.005"/>
+  <testcase name="shouldThrowUnregisteredComponentExceptionWhenTryingToGetComponentWhichDependenciesNotRegistered" classname="org.fpm.di.example.MyTest" time="0.001"/>
+  <testcase name="shouldThrowBindExceptionWhenTryingToRegisterClassWithMoreThanOneInjectionConstructor" classname="org.fpm.di.example.MyTest" time="0.001"/>
+  <testcase name="shouldThrowBindExceptionWhenTryingToRegisterAbstractClass" classname="org.fpm.di.example.MyTest" time="0.001"/>
+  <testcase name="shouldThrowCircularInjectExceptionWhenTryingToRegisterComponentWithCircularInjectDependency" classname="org.fpm.di.example.MyTest" time="0.001"/>
+  <testcase name="shouldThrowBindExceptionWhenTryingToRegisterInterface" classname="org.fpm.di.example.MyTest" time="0.001"/>
+  <testcase name="shouldThrowBindExceptionWhenTryingToRebindWithClass" classname="org.fpm.di.example.MyTest" time="0.0"/>
+  <testcase name="shouldResolveSingletonWithInjection" classname="org.fpm.di.example.MyTest" time="0.0"/>
+  <testcase name="shouldThrowBindExceptionWhenTryingToRebindWithInstance" classname="org.fpm.di.example.MyTest" time="0.001"/>
+  <testcase name="shouldThrowUnregisteredComponentExceptionWhenTryingToGetUnregisteredComponent" classname="org.fpm.di.example.MyTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
